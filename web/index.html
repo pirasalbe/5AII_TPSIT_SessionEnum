@@ -12,15 +12,33 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="jumbotron text-center"><h2>Session</h2></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <a href="listSession">Ciao</a>
+        <form action="listSession">
+            <div class="container">
+                <div class="row">
+                    <div class="jumbotron text-center"><h2>Session</h2></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="studente">Studente: </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="studente">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="lang">Linguaggio:  </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="lang">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <input class="btn btn-default" align="center" type="submit" name="Invia" value="send">
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </body>
 </html>

@@ -14,10 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class listSession extends HttpServlet {
-    private static int counter = 0; //how many views
-    
-    //increment value with concurrency
-    private synchronized void Increment(){ counter++; }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,9 +29,6 @@ public class listSession extends HttpServlet {
             value = (int)session.getAttribute("counter") + 1;
             session.setAttribute("counter", value);
         }
-        
-        //counter
-        Increment();
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -56,16 +49,6 @@ public class listSession extends HttpServlet {
             //return to index
             out.println("<div class=\"row\">" +
                         "<div class=\"alert alert-info col-sm-2\"><a href=\"index.html\">Return to index</a></div>" +
-                        "</div><br>");
-            
-            //show views
-            out.println("<div class=\"row\">" +
-                        "<div class=\"alert alert-warning col-sm-2\">Views: " + counter + "</div>" +
-                        "</div>");
-            
-            //show views per session
-            out.println("<div class=\"row\">" +
-                        "<div class=\"alert alert-warning col-sm-2\">Individual views: " + value + "</div>" +
                         "</div><br>");
             
             out.println("</div>");
