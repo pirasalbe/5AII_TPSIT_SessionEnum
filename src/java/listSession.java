@@ -21,14 +21,10 @@ public class listSession extends HttpServlet {
         
         //get session
         HttpSession session = request.getSession();
-        int value = 1;
         
-        if(session.getAttribute("counter")==null){
-            session.setAttribute("counter", value);
-        } else{
-            value = (int)session.getAttribute("counter") + 1;
-            session.setAttribute("counter", value);
-        }
+        //setting value
+        session.setAttribute("name", request.getParameter("name"));
+        session.setAttribute("lang", request.getParameter("lang"));
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -43,8 +39,13 @@ public class listSession extends HttpServlet {
             
             //title
             out.println("<div class=\"row\">" +
-                        "<div class=\"jumbotron text-center\"><h2>List Views</h2></div>" +
+                        "<div class=\"jumbotron text-center\"><h2>Hello " + session.getAttribute("name") + "!</h2></div>" +
                         "</div>");
+            
+            //comment
+            out.println("<div class=\"row\">" +
+                        "<div class=\"alert alert-success col-sm-2\">"+ session.getAttribute("lang") + "? Good choice/div>" +
+                        "</div><br>");
             
             //return to index
             out.println("<div class=\"row\">" +
