@@ -4,9 +4,17 @@
         <servlet-name>listSession</servlet-name>
         <servlet-class>listSession</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>listInfo</servlet-name>
+        <servlet-class>listInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>listSession</servlet-name>
         <url-pattern>/listSession</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listInfo</servlet-name>
+        <url-pattern>/listInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

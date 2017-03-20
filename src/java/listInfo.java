@@ -6,15 +6,29 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class listSession extends HttpServlet {
+/**
+ *
+ * @author pirasalbe
+ */
+public class listInfo extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -22,14 +36,10 @@ public class listSession extends HttpServlet {
         //get session
         HttpSession session = request.getSession();
         
-        //setting value
-        session.setAttribute("name", request.getParameter("name"));
-        session.setAttribute("lang", request.getParameter("lang"));
-        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<head>\n" +
-                        "<title>Session</title>" +
+                        "<title>Info</title>" +
                         "<meta charset=\"UTF-8\">" +
                         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                         "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">" +
@@ -39,17 +49,27 @@ public class listSession extends HttpServlet {
             
             //title
             out.println("<div class=\"row\">" +
-                        "<div class=\"jumbotron text-center\"><h2>Hello " + session.getAttribute("name") + "!</h2></div>" +
+                        "<div class=\"jumbotron text-center\"><h2>Some Info</h2></div>" +
                         "</div>");
             
-            //comment
-            out.println("<div class=\"row\">" +
-                        "<div class=\"alert alert-success col-sm-4\">"+ session.getAttribute("lang") + "? <h4>Good choice!!!</h4></div>" +
+            //value
+            Enumeration e = session.getAttributeNames();
+            while(e.hasMoreElements()){
+                String name = (String)e.nextElement();
+                out.println("<div class=\"row\">" +
+                        "<div class=\"alert alert-success col-sm-4\">" + name + ": "+ session.getAttribute(name) +"</div>" +
                         "</div><br>");
+            }
             
-            //get info
+            //session
             out.println("<div class=\"row\">" +
-                        "<div class=\"alert alert-info col-sm-4\"><a href=\"listInfo\">Get some info</a></div>" +
+                        "<div class=\"alert alert-success col-sm-4\">ID: " + session.getId() +"</div>" +
+                        "</div><br>");
+            out.println("<div class=\"row\">" +
+                        "<div class=\"alert alert-success col-sm-4\">Creation time: " + new Timestamp(session.getCreationTime()) +"</div>" +
+                        "</div><br>");
+            out.println("<div class=\"row\">" +
+                        "<div class=\"alert alert-success col-sm-4\">Last access: " + new Timestamp(session.getLastAccessedTime()) +"</div>" +
                         "</div><br>");
             
             out.println("</div>");
